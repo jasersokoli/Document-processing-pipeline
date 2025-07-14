@@ -170,28 +170,28 @@ async function createSampleFiles() {
     fs.mkdirSync(samplesDir, { recursive: true });
   }
 
-  console.log('📄 Generating real PDF files...\n');
+  console.log('Generating real PDF files...\n');
 
   try {
     // Generate sample files
     console.log('Creating invoice-sample.pdf...');
     await generateSampleInvoice();
-    console.log('✅ Created invoice-sample.pdf');
+    console.log('Created invoice-sample.pdf');
 
     console.log('Creating receipt-sample.pdf...');
     await generateSampleReceipt();
-    console.log('✅ Created receipt-sample.pdf');
+    console.log('Created receipt-sample.pdf');
 
     console.log('Creating contract-sample.pdf...');
     await generateSampleContract();
-    console.log('✅ Created contract-sample.pdf');
+    console.log('Created contract-sample.pdf');
 
-    console.log('\n📁 Real PDF files created in the "samples" directory');
+    console.log('\nReal PDF files created in the "samples" directory');
     console.log('You can now open these files in any PDF viewer!');
     console.log('Upload them to test the document processing pipeline.');
     
   } catch (error) {
-    console.error('❌ Error generating PDF files:', error.message);
+    console.error('Error generating PDF files:', error.message);
   }
 }
 

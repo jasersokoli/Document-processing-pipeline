@@ -2,7 +2,7 @@ import { ProcessingPipeline } from './services/processingPipeline';
 import { DocumentType } from './types';
 
 async function testPipeline() {
-  console.log('🧪 Testing Document Processing Pipeline\n');
+  console.log('Testing Document Processing Pipeline\n');
   
   const pipeline = new ProcessingPipeline();
   
@@ -17,7 +17,7 @@ async function testPipeline() {
   ];
   
   for (const testCase of testCases) {
-    console.log(`📄 Processing ${testCase.name}...`);
+    console.log(`Processing ${testCase.name}...`);
     
     try {
       const result = await pipeline.processDocument(
@@ -27,23 +27,23 @@ async function testPipeline() {
       );
       
       if (result.success) {
-        console.log(`✅ Success! Document ID: ${result.documentId}`);
+        console.log(`Success! Document ID: ${result.documentId}`);
         console.log(`   Status: ${result.status}`);
         console.log(`   Type: ${result.metadata?.documentType}`);
         console.log(`   Extracted Data:`, result.metadata?.extractedData);
       } else {
-        console.log(`❌ Failed: ${result.error}`);
+        console.log(`Failed: ${result.error}`);
       }
       
       console.log('');
       
     } catch (error) {
-      console.error(`❌ Error processing ${testCase.name}:`, error);
+      console.error(`Error processing ${testCase.name}:`, error);
     }
   }
   
   // Test status retrieval
-  console.log('📊 Retrieving all documents...');
+  console.log('Retrieving all documents...');
   const allDocuments = await pipeline.getAllDocuments();
   console.log(`Found ${allDocuments.length} documents`);
   
@@ -51,7 +51,7 @@ async function testPipeline() {
     console.log(`   - ${doc.metadata.originalName} (${doc.status})`);
   }
   
-  console.log('\n🎉 Test completed!');
+  console.log('\nTest completed!');
 }
 
 // Run the test if this file is executed directly

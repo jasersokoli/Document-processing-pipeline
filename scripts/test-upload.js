@@ -93,7 +93,7 @@ async function getAllDocuments(baseUrl = 'http://localhost:3000') {
 }
 
 async function testUploads() {
-  console.log('🚀 Testing Document Upload and Processing Pipeline\n');
+  console.log('Testing Document Upload and Processing Pipeline\n');
   
   const samplesDir = path.join(__dirname, '..', 'samples');
   const sampleFiles = [
@@ -109,24 +109,24 @@ async function testUploads() {
     const filePath = path.join(samplesDir, fileName);
     
     if (!fs.existsSync(filePath)) {
-      console.log(`❌ File not found: ${fileName}`);
+      console.log(`File not found: ${fileName}`);
       continue;
     }
     
-    console.log(`📤 Uploading ${fileName}...`);
+    console.log(`Uploading ${fileName}...`);
     
     try {
       const result = await uploadFile(filePath);
       
       if (result.status === 200 && result.data.success) {
-        console.log(`✅ Upload successful! Document ID: ${result.data.documentId}`);
+        console.log(`Upload successful! Document ID: ${result.data.documentId}`);
         uploadResults.push({
           fileName,
           documentId: result.data.documentId,
           success: true
         });
       } else {
-        console.log(`❌ Upload failed: ${result.data.error || 'Unknown error'}`);
+        console.log(`Upload failed: ${result.data.error || 'Unknown error'}`);
         uploadResults.push({
           fileName,
           success: false,
@@ -134,7 +134,7 @@ async function testUploads() {
         });
       }
     } catch (error) {
-      console.log(`❌ Upload error for ${fileName}: ${error.message}`);
+      console.log(`Upload error for ${fileName}: ${error.message}`);
       uploadResults.push({
         fileName,
         success: false,
@@ -146,11 +146,11 @@ async function testUploads() {
   }
   
   // Wait a moment for processing to complete
-  console.log('⏳ Waiting for processing to complete...');
+  console.log('Waiting for processing to complete...');
   await new Promise(resolve => setTimeout(resolve, 2000));
   
   // Check status of uploaded documents
-  console.log('📊 Checking document statuses...\n');
+  console.log('Checking document statuses...\n');
   
   for (const result of uploadResults) {
     if (result.success) {
@@ -159,7 +159,7 @@ async function testUploads() {
         
         if (statusResult.status === 200) {
           const doc = statusResult.data;
-          console.log(`📄 ${result.fileName}:`);
+          console.log(`${result.fileName}:`);
           console.log(`   Status: ${doc.status}`);
           console.log(`   Type: ${doc.metadata?.documentType}`);
           
@@ -178,10 +178,10 @@ async function testUploads() {
             console.log(`   Error: ${doc.errorMessage}`);
           }
         } else {
-          console.log(`❌ Failed to get status for ${result.fileName}`);
+          console.log(`Failed to get status for ${result.fileName}`);
         }
       } catch (error) {
-        console.log(`❌ Error checking status for ${result.fileName}: ${error.message}`);
+        console.log(`Error checking status for ${result.fileName}: ${error.message}`);
       }
       
       console.log('');
@@ -189,7 +189,7 @@ async function testUploads() {
   }
   
   // Show all documents
-  console.log('📋 All Documents Summary:');
+  console.log('All Documents Summary:');
   try {
     const allDocs = await getAllDocuments();
     if (allDocs.status === 200 && allDocs.data.success) {
@@ -199,11 +199,11 @@ async function testUploads() {
       });
     }
   } catch (error) {
-    console.log(`❌ Error getting all documents: ${error.message}`);
+    console.log(`Error getting all documents: ${error.message}`);
   }
   
-  console.log('\n🎉 Upload and processing test completed!');
-  console.log('\n💡 Next steps:');
+  console.log('\nUpload and processing test completed!');
+  console.log('\nNext steps:');
   console.log('   1. Open public/index.html in your browser to see the web interface');
   console.log('   2. Try uploading your own PDF files');
   console.log('   3. Check the API endpoints for more details');
